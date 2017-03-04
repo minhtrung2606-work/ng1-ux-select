@@ -1,0 +1,32 @@
+{
+  "name": "ng1-ux-select",
+  "version": "1.0.0",
+  "description": "An UX select component",
+  "main": "ng1-ux-select.module.js",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-jshint": "^2.0.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-stylus": "^2.6.0",
+    "gulp-uglify": "^2.0.1",
+    "jshint": "^2.9.4"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/minhtrung2606-work/ng1-ux-select.git"
+  },
+  "keywords": [
+    "Ng1-Ux-Select"
+  ],
+  "author": " <minhtrung2606.work@outlook.com> (Nguyen Minh Trung <minhtrung2606.work@outlook.com>)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/minhtrung2606-work/ng1-ux-select/issues"
+  },
+  "homepage": "https://github.com/minhtrung2606-work/ng1-ux-select#readme"
+}
