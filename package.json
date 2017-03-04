@@ -11,7 +11,8 @@
     "gulp-rename": "^1.2.2",
     "gulp-stylus": "^2.6.0",
     "gulp-uglify": "^2.0.1",
-    "jshint": "^2.9.4"
+    "jshint": "^2.9.4",
+    "serve": "^4.0.1"
   },
   "scripts": {
     "test": "test"
