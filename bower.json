@@ -1,0 +1,23 @@
+{
+  "name": "ng1-ux-select",
+  "homepage": "https://github.com/minhtrung2606-work/ng1-ux-select",
+  "authors": [
+    "(Nguyen Minh Trung <minhtrung2606.work@outlook.com>)"
+  ],
+  "description": "An UX select component",
+  "main": "ng1-ux-select.directive.js",
+  "keywords": [
+    "Ng1-Ux-Select"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.2"
+  }
+}
