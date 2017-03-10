@@ -1,15 +1,26 @@
 (function () {
   'use strict';
   angular
-    .module('')
+    .module('nmt.comp.ng1UxSelect')
     .controller('Ng1UxSelectCtrl', Ng1UxSelectCtrl)
   ;
   Ng1UxSelectCtrl.$inject = [];
 
   function Ng1UxSelectCtrl() {
+    var vm = this;
 
+    constructor();
+
+    function constructor() {
+      vm.onInputFocused = onInputFocused;
+    }
+
+    function onInputFocused() {
+      $('.dropdown-toggle').dropdown('toggle');
+    }
   }
 })();
+
 (function () {
   'use strict';
   angular
@@ -19,16 +30,34 @@
   Ng1UxSelectDDO.$inject = [];
 
   function Ng1UxSelectDDO() {
+    var template = [
+      '<div class="ng1-ux-select-comp">',
+      '  <div class="input-group dropdown">',
+      '    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" ng-focus="vm.onInputFocused()">',
+      '    <ul class="dropdown-menu" aria-labelledby="ng1-ux-select-dropdown-label">',
+      '      <li><a href="#">Action</a></li>',
+      '      <li><a href="#">Another action</a></li>',
+      '      <li><a href="#">Something else here</a></li>',
+      '      <li role="separator" class="divider"></li>',
+      '      <li><a href="#">Separated link</a></li>',
+      '    </ul>',
+      '    <span class="input-group-addon dropdown-toggle" role="button" id="ng1-ux-select-dropdown" data-toggle="dropdown"',
+      '          aria-haspopup="true" aria-expanded="true"><span class="caret"></span></span>',
+      '  </div>',
+      '</div>'
+    ];
+
     return {
       scope: {},
       restrict: 'E',
-      template: '<div>ng1-ux-select works!</div>',
+      template: template.join(''),
       controller: 'Ng1UxSelectCtrl',
       controllerAs: 'vm',
       bindToController: {}
     };
   }
 })();
+
 (function () {
   'use strict';
   angular
