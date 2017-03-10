@@ -7,6 +7,16 @@
   Ng1UxSelectCtrl.$inject = [];
 
   function Ng1UxSelectCtrl() {
+    var vm = this;
 
+    constructor();
+
+    function constructor() {
+      vm.onInputFocused = onInputFocused;
+    }
+
+    function onInputFocused() {
+      $('.dropdown-toggle').dropdown('toggle');
+    }
   }
 })();
