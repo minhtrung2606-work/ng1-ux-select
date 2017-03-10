@@ -12,11 +12,23 @@
     constructor();
 
     function constructor() {
+      // Properties
+      vm.loading = true;
+
+      // Methods
       vm.onInputFocused = onInputFocused;
+      vm.onToggleDropDown = onToggleDropDown;
     }
 
     function onInputFocused() {
       $('.dropdown-toggle').dropdown('toggle');
+    }
+
+    function onToggleDropDown($event) {
+      if (vm.loading) {
+        $event.preventDefault();
+        $event.stopPropagation();
+      }
     }
   }
 })();
