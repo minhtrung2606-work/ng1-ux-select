@@ -10,7 +10,7 @@
     var template = [
       '<div class="ng1-ux-select-comp">',
       '  <div class="input-group dropdown">',
-      '    <input ng-model="vm.searchString" ng-keypress="vm.onKeyPressed()" ng-disabled="vm.loading" type="text" class="form-control" aria-label="Amount (to the nearest dollar)" ng-focus="vm.onInputFocused()">',
+      '    <input ng-model="vm.searchString" ng-keypress="vm.onKeyPressed()" ng-readonly="vm.loading" type="text" class="form-control" aria-label="Amount (to the nearest dollar)" ng-focus="vm.onInputFocused()">',
       '    <ul class="dropdown-menu" aria-labelledby="ng1-ux-select-dropdown-label">',
       '      <li ng-repeat="item in vm.itemList track by $index">',
       '        <a>{{item.name}}</a>',

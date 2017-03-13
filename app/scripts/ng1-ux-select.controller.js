@@ -17,7 +17,7 @@
 
     function constructor() {
       // Local variables
-      debouceSearch = _.debounce(startSearching, 250);
+      debouceSearch = _.debounce(startSearching, 500);
       searchTimeoutId = -1;
       searchString = '';
 
