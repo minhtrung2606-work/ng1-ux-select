@@ -34,7 +34,23 @@
       template: template.join(''),
       controller: 'Ng1UxSelectCtrl',
       controllerAs: 'vm',
-      bindToController: {}
+      bindToController: {},
+      link: function (scope, elem) {
+        var vm = scope.vm;
+        var ngElem = angular.element(elem);
+        var ngDropDownElem = ngElem.find('.input-group.dropdown');
+
+        if (vm) {
+          vm.isDropdownOpened = isDropdownOpened;
+        }
+
+        isDropdownOpened();
+
+        function isDropdownOpened() {
+          var cssClass = ngDropDownElem.attr('class');
+          return cssClass && cssClass.indexOf('open') > -1;
+        }
+      }
     };
   }
 })();

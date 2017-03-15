@@ -31,7 +31,11 @@
     }
 
     function onInputFocused() {
-      $('.dropdown-toggle').dropdown('toggle');
+      if (!vm.isDropdownOpened()) {
+        $('.dropdown-toggle').dropdown('toggle');
+      } else {
+        console.log('Already opened');
+      }
     }
 
     function onKeyPressed() {
