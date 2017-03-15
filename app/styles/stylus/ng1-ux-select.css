@@ -7,8 +7,12 @@
   overflow: auto;
 }
 .ng1-ux-select-comp .dropdown-menu li a {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
-  white-space: nowrap;
+  cursor: pointer;
+}
+.ng1-ux-select-comp .dropdown-menu li a,
+.ng1-ux-select-comp .dropdown-menu li div {
+/*overflow: hidden*/
+/*text-overflow: ellipsis*/
+/*width: 100%*/
+  white-space: normal;
 }
