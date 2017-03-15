@@ -1,3 +1,23 @@
 .ng1-ux-select-comp {
   position: relative;
 }
+.ng1-ux-select-comp .dropdown-menu {
+  width: 100%;
+  max-height: 30rem;
+  overflow: auto;
+}
+.ng1-ux-select-comp .dropdown-menu li a.selected {
+  background-color: #e8e8e8;
+  background-image: linear-gradient(to bottom, #f5f5f5 0, #e8e8e8 100%);
+  background-repeat: repeat-x;
+}
+.ng1-ux-select-comp .dropdown-menu li a {
+  cursor: pointer;
+}
+.ng1-ux-select-comp .dropdown-menu li a,
+.ng1-ux-select-comp .dropdown-menu li div {
+/*overflow: hidden*/
+/*text-overflow: ellipsis*/
+/*width: 100%*/
+  white-space: normal;
+}
