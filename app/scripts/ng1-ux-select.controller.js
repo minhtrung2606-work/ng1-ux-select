@@ -19,6 +19,7 @@
   function Ng1UxSelectCtrl($scope, $timeout) {
     var vm = this;
 
+    var selectedItem;
     var debouceSearch;
     var itemList;
     var searchTimeoutId;
@@ -39,6 +40,7 @@
       // Methods
       vm.getItemDesc = getItemDesc;
       vm.onInputFocused = onInputFocused;
+      vm.onItemClicked = onItemClicked;
       vm.onKeyPressed = onKeyPressed;
       vm.onToggleDropDown = onToggleDropDown;
     }
@@ -67,6 +69,16 @@
       if (!vm.isDropdownOpened()) {
         $('.dropdown-toggle').dropdown('toggle');
       }
+    }
+
+    function onItemClicked(item) {
+      if (selectedItem) {
+        selectedItem.selected = false;
+      }
+
+      item.selected = true;
+      vm.searchString = item.name;
+      selectedItem = item;
     }
 
     function onKeyPressed() {
