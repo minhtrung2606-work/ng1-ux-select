@@ -30,7 +30,7 @@
 
     function constructor() {
       // Local variables
-      debouceSearch = _.debounce(startSearching, 500);
+      debouceSearch = _.debounce(startSearching, 250);
       searchTimeoutId = -1;
       searchString = '';
 
@@ -39,7 +39,6 @@
 
       // Methods
       vm.getItemDesc = getItemDesc;
-      vm.onInputFocused = onInputFocused;
       vm.onItemClicked = onItemClicked;
       vm.onKeyPressed = onKeyPressed;
       vm.onToggleDropDown = onToggleDropDown;
@@ -63,12 +62,6 @@
         new Item('Item 4'),
         new Item('Item 5')
       ];
-    }
-
-    function onInputFocused() {
-      if (!vm.isDropdownOpened()) {
-        $('.dropdown-toggle').dropdown('toggle');
-      }
     }
 
     function onItemClicked(item) {
@@ -102,6 +95,7 @@
     }
 
     function startSearching() {
+      vm.openDropdown();
       searchString = vm.searchString;
       vm.searchString = 'Loading...';
       itemList = vm.itemList;

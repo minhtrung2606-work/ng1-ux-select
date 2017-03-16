@@ -30,7 +30,7 @@
 
     function constructor() {
       // Local variables
-      debouceSearch = _.debounce(startSearching, 500);
+      debouceSearch = _.debounce(startSearching, 250);
       searchTimeoutId = -1;
       searchString = '';
 
@@ -39,7 +39,6 @@
 
       // Methods
       vm.getItemDesc = getItemDesc;
-      vm.onInputFocused = onInputFocused;
       vm.onItemClicked = onItemClicked;
       vm.onKeyPressed = onKeyPressed;
       vm.onToggleDropDown = onToggleDropDown;
@@ -63,12 +62,6 @@
         new Item('Item 4'),
         new Item('Item 5')
       ];
-    }
-
-    function onInputFocused() {
-      if (!vm.isDropdownOpened()) {
-        $('.dropdown-toggle').dropdown('toggle');
-      }
     }
 
     function onItemClicked(item) {
@@ -102,6 +95,7 @@
     }
 
     function startSearching() {
+      vm.openDropdown();
       searchString = vm.searchString;
       vm.searchString = 'Loading...';
       itemList = vm.itemList;
@@ -123,27 +117,25 @@
 
   function Ng1UxSelectDDO() {
     var template = [
-      '<div class="ng1-ux-select-comp">',
-      '  <div class="input-group dropdown">',
-      '    <input ng-model="vm.searchString" ng-keypress="vm.onKeyPressed()" ng-readonly="vm.loading" type="text" class="form-control" aria-label="Amount (to the nearest dollar)" ng-focus="vm.onInputFocused()">',
-      '    <ul class="dropdown-menu" aria-labelledby="ng1-ux-select-dropdown-label">',
-      '      <li ng-repeat="item in vm.itemList track by $index"',
-      '          ng-click="vm.onItemClicked(item)">',
-      '        <a ng-class="{\'selected\': item.selected}">',
-      '          <span><strong>{{item.name}}</strong></span><br/>',
-      '          <span><small>{{vm.getItemDesc(item)}}</small></span>',
-      '        </a>',
-      '      </li>',
-      '      <li class="disabled" ng-if="!vm.loading && (!vm.itemList || vm.itemList.length === 0)">',
-      '        <a><small><dfn>No item existing</dfn></small></a>',
-      '      </li>',
-      '      <li ng-if="vm.loading">',
-      '        <a><small>Loading...</small></a>',
-      '      </li>',
-      '    </ul>',
-      '    <span ng-click="vm.onToggleDropDown($event)" class="input-group-addon dropdown-toggle" role="button" id="ng1-ux-select-dropdown" data-toggle="dropdown"',
-      '          aria-haspopup="true" aria-expanded="true"><span class="caret"></span></span>',
-      '  </div>',
+      '<div class="ng1-ux-select-comp dropdown">',
+      '  <input ng-model="vm.searchString" ng-keypress="vm.onKeyPressed()" ng-readonly="vm.loading"',
+      '         class="form-control dropdown-toggle" id="ng1-ux-select-dropdown" data-toggle="dropdown"',
+      '         aria-haspopup="true" aria-expanded="true">',
+      '  <ul class="dropdown-menu" aria-labelledby="ng1-ux-select-dropdown">',
+      '    <li ng-repeat="item in vm.itemList track by $index"',
+      '        ng-click="vm.onItemClicked(item)">',
+      '      <a ng-class="{\'selected\': item.selected}">',
+      '        <span><strong>{{item.name}}</strong></span><br/>',
+      '        <span><small>{{vm.getItemDesc(item)}}</small></span>',
+      '      </a>',
+      '    </li>',
+      '    <li class="disabled" ng-if="!vm.loading && (!vm.itemList || vm.itemList.length === 0)">',
+      '      <a><small><dfn>No item existing</dfn></small></a>',
+      '    </li>',
+      '    <li ng-if="vm.loading">',
+      '      <a><small>Loading...</small></a>',
+      '    </li>',
+      '  </ul>',
       '</div>'
     ];
 
@@ -155,19 +147,62 @@
       controllerAs: 'vm',
       bindToController: {},
       link: function (scope, elem) {
-        var vm = scope.vm;
-        var ngElem = angular.element(elem);
-        var ngDropDownElem = ngElem.find('.input-group.dropdown');
+        // CONSTANT
+        var ESC_KEY = 27;
 
-        if (vm) {
-          vm.isDropdownOpened = isDropdownOpened;
+        var vm = scope.vm;
+        var ngElem;
+        var ngDropDownElem;
+
+        constructor();
+
+        function constructor() {
+          // Local variable initiation
+          ngElem = angular.element(elem);
+          ngDropDownElem = ngElem.find('.ng1-ux-select-comp.dropdown');
+
+          // Expose more API
+          if (vm) {
+            vm.closeDropdown = closeDropdown;
+            vm.isDropdownOpened = isDropdownOpened;
+            vm.openDropdown = openDropdown;
+          }
+
+          // Add event listeners
+          ngElem.on('keyup', onElemKeyUp);
+          scope.$on('destroy', onScopeDestroyed);
         }
 
-        isDropdownOpened();
+        function closeDropdown() {
+          if (vm.isDropdownOpened()) {
+            $('.dropdown-toggle').dropdown('toggle');
+          }
+        }
 
         function isDropdownOpened() {
           var cssClass = ngDropDownElem.attr('class');
           return cssClass && cssClass.indexOf('open') > -1;
+        }
+
+        function onElemKeyUp(event) {
+          var keyCode = event.keyCode;
+          if (keyCode === ESC_KEY) {
+            vm.closeDropdown();
+          } else {
+            console.log(keyCode);
+          }
+        }
+
+        function openDropdown() {
+          if (!vm.isDropdownOpened()) {
+            $('.dropdown-toggle').dropdown('toggle');
+          }
+        }
+
+        function onScopeDestroyed() {
+          ngElem.off('keyup', onElemKeyUp);
+          ngDropDownElem = null;
+          ngElem = null;
         }
       }
     };

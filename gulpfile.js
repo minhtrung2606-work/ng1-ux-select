@@ -40,3 +40,4 @@ gulp.task('watch', function() {
 
 // Default Task
 gulp.task('default', ['lint', 'stylus', 'scripts']);
+gulp.task('build', ['lint', 'stylus', 'scripts']);
